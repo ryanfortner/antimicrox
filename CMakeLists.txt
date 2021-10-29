@@ -26,6 +26,10 @@ if(POLICY CMP0071)
     cmake_policy(SET CMP0071 NEW)
 endif()
 
+set(CMAKE_PREFIX_PATH "C:\\Qt\\Qt5.12.11\\5.12.11\\mingw73_64")
+set(CMAKE_INSTALL_PREFIX "C:/Users/pawel/installantimicrox") 
+
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules" "${CMAKE_ROOT}/Modules")
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -706,6 +710,22 @@ if(WIN32 AND NOT UNIX)
     set(CPACK_NSIS_HELP_LINK "http:\\\\\\\\github.com/AntiMicroX/antimicrox/wiki")
     set(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\github.com/AntiMicroX/antimicrox")
     set(CPACK_NSIS_MODIFY_PATH ON)
+
+    list(APPEND EXTRA_DLL_FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/bin/Qt5Core.dll"
+    "${CMAKE_CURRENT_BINARY_DIR}/bin/Qt5Gui.dll"
+    "${CMAKE_CURRENT_BINARY_DIR}/bin/Qt5Concurrent.dll"
+    "${CMAKE_CURRENT_BINARY_DIR}/bin/Qt5Network.dll"
+    )
+    # Target to copy Qt DLL files.
+    add_custom_target(install_extra_dlls)
+    foreach(CURRENT_DLL_FILE ${EXTRA_DLL_FILES})
+        
+        install(FILES ${CURRENT_DLL_FILE} TYPE BIN )#DESTINATION  "${CMAKE_INSTALL_PREFIX}/")
+        # add_custom_command(TARGET install_extra_dlls PRE_BUILD
+        #     COMMAND ${CMAKE_COMMAND} -E copy ${CURRENT_DLL_FILE} "${CMAKE_INSTALL_PREFIX}/"
+        # )
+    endforeach()
 endif()
 
 set(CPACK_PACKAGE_EXECUTABLES "antimicrox;AntiMicroX")

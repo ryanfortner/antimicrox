@@ -716,6 +716,7 @@ if(WIN32 AND NOT UNIX)
     "${CMAKE_CURRENT_BINARY_DIR}/bin/Qt5Gui.dll"
     "${CMAKE_CURRENT_BINARY_DIR}/bin/Qt5Concurrent.dll"
     "${CMAKE_CURRENT_BINARY_DIR}/bin/Qt5Network.dll"
+    "${CMAKE_CURRENT_BINARY_DIR}/bin/Qt5Widgets.dll"
     )
     # Target to copy Qt DLL files.
     add_custom_target(install_extra_dlls)

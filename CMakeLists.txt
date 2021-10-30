@@ -48,7 +48,7 @@ CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
 if(COMPILER_SUPPORTS_CXX11)
     message("Build type: ${CMAKE_BUILD_TYPE}")
     #missing SDL2 libwinpthread-1.dll libgcc_s_seh-1.dll
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -static")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fno-omit-frame-pointer")
     if(UNIX)
         set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -rdynamic")
@@ -58,9 +58,9 @@ else()
     message(FATAL_ERROR "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif(COMPILER_SUPPORTS_CXX11)
 
-set(CMAKE_CXX_STANDARD_LIBRARIES "-static-libgcc -static-libstdc++ -lwsock32 -lws2_32 ${CMAKE_CXX_STANDARD_LIBRARIES}")
+set(CMAKE_CXX_STANDARD_LIBRARIES " -lwsock32 -lws2_32 ${CMAKE_CXX_STANDARD_LIBRARIES}")
 
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Bstatic,--whole-archive -lwinpthread -Wl,--no-whole-archive")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -static-libgcc -static-libstdc++ -lwinpthread ")
 
 
 # The version number.
@@ -734,6 +734,7 @@ if(WIN32 AND NOT UNIX)
         # )
     endforeach()
 endif()
+
 
 set(CPACK_PACKAGE_EXECUTABLES "antimicrox;AntiMicroX")
 set(CPACK_CREATE_DESKTOP_LINKS "antimicrox")

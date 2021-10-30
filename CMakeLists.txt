@@ -717,12 +717,15 @@ if(WIN32 AND NOT UNIX)
     set(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\github.com/AntiMicroX/antimicrox")
     set(CPACK_NSIS_MODIFY_PATH ON)
 
+    find_path(SDL2_DLL_LOCATION_DIR "SDL2.dll" HINTS "${SDL2_LIBRARY_DIRS}/../bin")
+    message("SDL2: dll: ${SDL2_DLL_LOCATION_DIR}")
     list(APPEND EXTRA_DLL_FILES
     "${CMAKE_CURRENT_BINARY_DIR}/bin/Qt5Core.dll"
     "${CMAKE_CURRENT_BINARY_DIR}/bin/Qt5Gui.dll"
     "${CMAKE_CURRENT_BINARY_DIR}/bin/Qt5Concurrent.dll"
     "${CMAKE_CURRENT_BINARY_DIR}/bin/Qt5Network.dll"
     "${CMAKE_CURRENT_BINARY_DIR}/bin/Qt5Widgets.dll"
+    "${SDL2_DLL_LOCATION_DIR}/SDL2.dll"
     )
     # Target to copy Qt DLL files.
     add_custom_target(install_extra_dlls)
@@ -733,6 +736,7 @@ if(WIN32 AND NOT UNIX)
         #     COMMAND ${CMAKE_COMMAND} -E copy ${CURRENT_DLL_FILE} "${CMAKE_INSTALL_PREFIX}/"
         # )
     endforeach()
+
 endif()
 
 

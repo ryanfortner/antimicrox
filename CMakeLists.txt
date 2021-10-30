@@ -58,7 +58,7 @@ else()
     message(FATAL_ERROR "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif(COMPILER_SUPPORTS_CXX11)
 
-set(CMAKE_CXX_STANDARD_LIBRARIES " -lwsock32 -lws2_32 ${CMAKE_CXX_STANDARD_LIBRARIES}")
+set(CMAKE_CXX_STANDARD_LIBRARIES "-static-libgcc -static-libstdc++ -lwsock32 -lws2_32 ${CMAKE_CXX_STANDARD_LIBRARIES}")
 
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -static-libgcc -static-libstdc++ -lwinpthread ")
 
@@ -67,6 +67,7 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -static-libgcc -st
 set(ANTIMICROX_MAJOR_VERSION 3)
 set(ANTIMICROX_MINOR_VERSION 2)
 set(ANTIMICROX_PATCH_VERSION 0)
+
 
 if(UNIX)
     option(WITH_X11 "Compile with support for X11." ON)

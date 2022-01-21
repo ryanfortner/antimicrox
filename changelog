@@ -1,0 +1,11 @@
+antimicrox (3.2.1) unstable; urgency=low
+
+  * Add note about available update (enabled in Windows) #325
+  * Add database of SDL gamepad mappings (more gamepads will be enabled by default) #296
+  * Add proper printing information about connected devices to logs #282
+  * Apply proper theme to Windows version of app #279
+  * Add handling SIGABRT (with printing stack) #281
+  * Set theme for Windows #317
+  * Bump QT version used in Windows Release to 5.15 #326
+
+ -- Ryan Fortner <ryankfortner@gmail.com>  Thu, 20 Jan 2022 14:00:06 -0500
